@@ -1,6 +1,7 @@
 import { ChevronRight, Check } from "lucide-react"
 import { Button } from "../Button/Button"
 import RevealOnScroll from "../animations/RevealOnScroll"
+import Link from "next/link"
 
 export default function ApiDemo() {
   const features = [
@@ -47,10 +48,24 @@ export default function ApiDemo() {
                     </li>
                   ))}
                 </ul>
-                <div className="pt-4">
-                  <Button className="bg-[#3100b7] text-white hover:bg-[#3100b7]/90">
+                <div className="pt-4 space-y-4">
+                  <Link href="/company">
+                    <Button 
+                      variant="solid" 
+                      size="lg"
+                      className="w-full md:w-auto bg-[#3100b7] hover:bg-[#2a0098] text-white flex items-center justify-center gap-2"
+                    >
+                      Intégrez notre API
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    className="w-full md:w-auto border-[#3100b7] text-[#3100b7] hover:bg-[#3100b7] hover:text-white flex items-center justify-center gap-2"
+                  >
                     Voir la documentation
-                    <ChevronRight className="ml-2 h-4 w-4" />
+                    <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>

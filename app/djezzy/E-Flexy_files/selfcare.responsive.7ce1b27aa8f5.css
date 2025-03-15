@@ -1,0 +1,240 @@
+@media (max-width:800px) {
+    .search-users {
+        padding: 0 5px;
+    }
+}
+
+
+@media(min-width:600px) {
+    .row .col{
+        margin-top: 5px;
+    }
+}
+
+
+@media(max-width: 700px) {
+    #ecare-djezzy-tag {
+        display: none !important;
+    }
+}
+
+
+@media(max-width:600px) {
+    .row .col{
+        margin-top: 20px;
+    }
+}
+
+
+@media(max-width:1000px) {
+    .home .height-fix{
+        min-height: none;
+    }
+    #slide-out li {
+        position: relative;
+        text-align: left;
+        font-size: 3em !important;
+    }
+
+    .nav-wrapper {
+        margin-left: 10px;
+        padding-left: 10px;
+     }
+
+    #welcome-message #welcome-word{
+        font-size: 1em;
+    }
+
+    #ecare-image {
+        display: none;
+    }
+
+    nav .menu-burger {
+        display: inline;
+
+    }
+
+    #slide-out {
+        display: none !important;
+        padding-top: 10px;
+        padding-bottom: 0px;
+    }
+
+}
+
+
+@media(min-width:541px) and (max-width:992px) {
+    .fillLogin {
+        clear:both;
+        margin-top:150px;
+    }
+}
+
+
+@media(max-width:540px) {
+    .nav-wrapper {
+        margin: 0px
+    }
+    #welcome-message #welcome-word {
+        font-size: 12px
+    }
+    #welcome-message #ecare-djezzy-tag {
+        font-size: 12px
+    }
+    .content {
+        margin-top: 90px;
+        padding: 15px !important;
+    }
+    .content h2 {
+        font-size: 15px;
+        line-height: 1.6em;
+    }
+    .content h1 {
+        margin: 10px 0px;
+        font-size: 25px;
+    }
+    .content h1.home-banner{
+        margin-left: 15px;
+    }
+    .content h3 {
+        font-size: 10px;
+    }
+    #card-img {
+        padding: 0px;
+        margin-bottom: 0px
+    }
+    #card-img img{
+        width: 100%;
+        border-radius: 15px;
+    }
+    .card {
+        padding: 15px !important;
+    }
+    #topped-button {
+        top: -75px;
+        height: 40px;
+        left: 95px;
+        line-height: 40px;
+    }
+    #footer {
+        padding: 5px;
+    }
+    #footer h1 {
+        font-size: 12px;
+    }
+    #facture-card {
+        padding: 5px !important;
+    }
+    #facture-card h2 {
+        padding: 10px !important;
+    }
+    .mobile-v-btn {
+        display: block;
+        background: transparent !important;
+        padding: 0px !important;
+        border-radius: 0px !important;
+        box-shadow: none !important;
+    }
+    .mobile-v-btn img {
+        width: 20px;
+    }
+    .content .half-width{
+        width: 95% !important;
+        margin-right: 0% !important;
+    }
+    .row .full-width{
+        padding-right: 5% !important;
+        padding-left: 0% !important;
+    }
+    .arabic .row.full-width{
+        padding-left: 5% !important;
+        padding-right: 0% !important;
+    }
+    .cards-menu li {
+        padding: 3px 8px;
+        font-size: 15px;
+    }
+    #services .line {
+        margin-top: 10px;
+    }
+    .switch-card h2 {
+        font-size: 12px;
+    }
+    .content .line a {
+        margin-top: 10px !important;
+    }
+    .content .line h3{
+        margin-top: 20px !important;
+    }
+    #header-lang span{
+        margin-left: 10px
+    }
+}
+
+
+@media(max-width:400px) {
+    .col .s12{
+        margin-top: 10px !important;
+    }
+
+   .creditshare-form .btn {
+        margin-top: 10px;
+   }
+
+}
+
+
+@media(min-width:1166px) {
+
+    #section-login div.card {
+        max-width: 700px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}
+
+
+@media(max-width:992px) {
+    #table-bills .bill-tr{
+        width: 250px;
+    }
+    .amount-head {
+        margin-top: 30px !important;
+    }
+    .due-head {
+        margin-top: 90px !important;
+    }
+    .details-head {
+        margin-top: 10px;
+    }
+
+    .bill-amount .was-tapped {
+       min-width: 200px;
+    }
+    #services .btn-secondary-red {
+        margin-bottom: 20px;
+    }
+
+}
+
+
+@media(max-width:600px) {
+    .due-head {
+        margin-top: 150px !important;
+    }
+    .details-head {
+        margin-top: 10px;
+    }
+}
+
+@media(max-width:1051px) {
+    .sidenav li>a {
+        line-height: 20px !important;
+    }
+}
+
+@media (max-width: 724px) {
+    #welcome-message {
+        display: block;
+    }
+}

@@ -1,0 +1,373 @@
+/*Global*/
+
+@font-face {
+    font-family: 'roihu';
+    src: url("/static/fonts/Roihu-Regular.ae2afc9efd5d.otf");
+}
+
+html{height: 100%; sans-serif;}
+
+body{
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    padding: 0px !important;
+    color: var(--djezzy-grey);
+    font-family: 'roihu'!important;
+    background: rgba(117, 120, 123, .2);
+}
+
+:root {
+    --djezzy-red: #DA291C;
+    --djezzy-white: #FFF;
+    --djezzy-grey: #75787B;
+}
+
+
+a{
+    cursor: pointer;
+}
+.align-center{
+    text-align: center
+}
+.align-left{
+    text-align: left
+}
+.align-right{
+    text-align: right
+}
+
+.red{
+    color: var(--djezzy-red) !important;
+    background-color: var(--djezzy-white) !important
+}
+
+/*Nav*/
+nav{
+    height: 125px;
+    line-height: 100px;
+    background-color: #fff;
+    color: var(--djezzy-grey)
+}
+
+.nav-wrapper{
+    margin: 0px 40px;
+    height: 80% !important
+}
+
+.header-container {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0 40px;
+}
+
+.header-item {
+    flex-grow: 1;
+}
+
+.header-item.brand-header {
+    width: 30px;
+}
+
+.header-item.center {
+    flex-basis: 90%;
+    text-align: left;
+    line-height: 20px;
+    padding-top: 12px;
+}
+
+#ecare-image {
+    width: 35px;
+}
+
+#header-img{
+    background: url("/static/img/selfservice/header.7491459265dd.png")right no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%
+}
+
+#header-lang{
+    background: rgba(117, 120, 123, .1);
+    width: 100%;
+    height: 25px;
+    line-height: 92px;
+}
+
+.moreactions {
+    position: relative;
+    width: 100%;
+    background-color: #ececec;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 20px 0px;
+}
+
+
+
+.moreactionscontent {
+}
+
+.moreactionscontent .icon {
+    font-size: 36px;
+    margin-top: -9px
+}
+
+.moreactionscontent-body {
+    color: white;
+    margin-top: 10px;
+    padding-left: 42px;
+    box-shadow: none;
+    background-color: #6a7779 !important;
+    padding: 5px;
+}
+
+.moreactionscontent .moreactionscontent-body .pinpuk span {
+    width: 70px;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline
+}
+
+.moreactionscontent .btn
+{
+    background-color: #787878;
+}
+
+.moreactionscontent .btn:hover
+{
+    background-color: #000000;
+}
+
+#header-lang span{
+    position: relative;
+    top: -35px;
+    font-size: 13px;
+    margin-left: 50px
+}
+
+.brand-logo img{
+    width: 55px;
+    margin-top: 0px
+}
+
+
+#welcome-message #ecare-djezzy-tag{
+    color: var(--djezzy-red);
+    font-size: 18px
+}
+
+#welcome-message #welcome-word{
+    position: relative;
+    font-size: 18px
+}
+
+#welcome-message #phone-number{
+    position: relative;
+    font-size: 12px
+}
+
+#welcome-message img{
+    width: 35px
+}
+
+/*Side-nav*/
+#slide-out{
+    padding: 0px;
+    display: block !important;
+    transform: translateX(0%) !important;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    position: relative;
+}
+
+#slide-out img{
+    width: 30px!important;
+    margin-right: 10px;
+    vertical-align: sub;
+}
+
+#slide-out span{
+    position: relative;
+    top: -5px
+}
+
+.sidenav li>a{
+    color: var(--djezzy-grey) !important
+}
+
+/*~ Footer ~*/
+#footer{
+    height: auto;
+    padding: 50px;
+    background-color: rgba(117, 120, 123, .6) !important;
+    color: #fff;
+    border-top:  1.5px solid var(--djezzy-red)
+}
+#footer h1{
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+/* Copyright */
+#copyright{
+    height: auto;
+    padding: 15px 0px 10px 0px;
+    background-color: rgba(117, 120, 123, 1) !important;
+    font-size: 16px;
+    text-transform: initial;
+    color: #fff;
+    font-weight: 600;
+}
+
+
+/*~~ Pages ~~*/
+
+.row{
+    margin-bottom: 0px !important
+}
+
+.content{
+    padding: 50px;
+}
+
+.content h1{
+    font-size: 35px
+}
+
+.content h2{
+    font-size: 22px;
+    margin: 0px
+}
+
+.content h2 span{
+    font-size: 19px;
+    font-weight: 900
+}
+
+.content h3{
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.content .line{
+    border-bottom: 1px solid rgba(117, 120, 123, .2);
+}
+
+.content p{
+    font-size: 16px
+}
+
+.content .half-width{
+    width: 45% !important;
+    margin-right: 2.5% !important
+}
+
+.content a{
+    margin-top: 10px;
+    background: var(--djezzy-red);
+    border-radius: 5px;
+    padding: 0px 30px
+}
+
+.content a:hover:not(.select2-drop){
+    background: var(--djezzy-red);
+}
+
+.card{
+    background-color: var(--djezzy-white);
+    border-radius: 15px;
+    height: auto;
+    padding: 30px !important;
+    margin-top: 0px
+}
+
+.forfait{
+    margin-bottom: 15px !important
+}
+
+#topped-button{
+    position: relative;
+    top: -85px;
+    height: 45px;
+    left: 165px;
+    line-height: 50px
+}
+
+/*~~Services~~*/
+
+#services .card{
+    border-top-left-radius: 0px;
+    box-shadow: none !important;
+}
+
+#services .line{
+    margin-top: 25px
+}
+
+#services .active{
+    background-color: var(--djezzy-white)
+}
+
+#amigo-card{
+    display: none;
+}
+
+.cards-menu{
+    margin: 0px
+}
+
+.cards-menu li{
+    display: inline-block;
+    padding: 5px 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: rgba(117, 120, 123, .2);
+    font-size: 20px;
+    margin-left: -1px;
+    margin-right: -1px;
+    cursor: pointer;
+}
+
+.cards-menu-content .col{
+    text-align: center;
+}
+.cards-menu-content .col.s12{
+    margin-bottom: 20px;
+}
+
+.mobile-v-btn{
+    display: none;
+}
+
+.row .container{
+    padding: 10px;
+}
+
+.content h1.home-banner{
+    margin-left: 25px;
+}
+
+.row.full-width{
+    text-align: right;
+    padding-right: 7% !important;
+    padding-left: 0% !important;
+}
+
+.arabic .row.full-width{
+    text-align: left;
+    padding-left: 4.5% !important;
+    padding-right: 0% !important;
+}
+
+.home{
+    min-height: 700px;
+}
+.home .height-fix{
+    max-height: 300px!important;
+    overflow: auto;
+}
