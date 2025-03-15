@@ -1,5 +1,5 @@
 import { Users, Heart } from "lucide-react"
-import { Button } from "../Button/page"
+import { Button } from "../Button/Button"
 import RevealOnScroll from "../animations/RevealOnScroll"
 
 export default function ForWhom() {

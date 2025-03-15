@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
-import { Button } from "../Button/page"
+import { Button } from "../Button/Button"
 import { motion } from "framer-motion"
 
 export default function Hero() {

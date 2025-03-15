@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Heart, Menu, X } from "lucide-react"
-import { Button } from "../Button/page"
+import { Button } from "../Button/Button"
 import { motion, AnimatePresence } from "framer-motion"
 
 export default function Header() {
