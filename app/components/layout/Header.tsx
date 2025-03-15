@@ -5,6 +5,7 @@ import { Menu, X, LogIn } from "lucide-react"
 import { Button } from "../Button/Button"
 import Link from "next/link"
 import Image from 'next/image'
+import { API_BASE_URL } from '../../config/api'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -97,14 +98,20 @@ export default function Header() {
                 Inscrivez votre cause
               </Button>
             </Link>
-            <Button 
-              variant="outline" 
-              size="md"
-              className="border-white text-white hover:bg-white hover:text-[#2f01ad] transition-all duration-300 flex items-center gap-2"
+            <a 
+              href={`${API_BASE_URL}/admin`}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <LogIn className="h-4 w-4" />
-              Connexion
-            </Button>
+              <Button 
+                variant="outline" 
+                size="md"
+                className="border-white text-white hover:bg-white hover:text-[#2f01ad] transition-all duration-300 flex items-center gap-2"
+              >
+                <LogIn className="h-4 w-4" />
+                Connexion
+              </Button>
+            </a>
           </motion.div>
 
           <motion.button 
@@ -167,14 +174,20 @@ export default function Header() {
                       Inscrivez votre cause
                     </Button>
                   </Link>
-                  <Button 
-                    variant="outline" 
-                    size="md"
-                    className="w-full border-white text-white hover:bg-white hover:text-[#2f01ad] transition-all duration-300 flex items-center justify-center gap-2"
+                  <a 
+                    href={`${API_BASE_URL}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <LogIn className="h-4 w-4" />
-                    Connexion
-                  </Button>
+                    <Button 
+                      variant="outline" 
+                      size="md"
+                      className="w-full border-white text-white hover:bg-white hover:text-[#2f01ad] transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <LogIn className="h-4 w-4" />
+                      Connexion
+                    </Button>
+                  </a>
                 </motion.div>
               </div>
             </motion.div>

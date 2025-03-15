@@ -1,5 +1,4 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
-
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://1595fdnf-1337.uks1.devtunnels.ms';
 export const API_ENDPOINTS = {
   causes: `${API_BASE_URL}/api/dcf/causes`,
   donations: `${API_BASE_URL}/api/dcf/donations`,

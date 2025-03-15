@@ -1,11 +1,15 @@
 'use client';
 
+import { Cause } from '../types';
 import Image from 'next/image';
 import { useState } from 'react';
 import Tooltip from './components/Tooltip';
 import { EFlexyTooltipContent, CCPTooltipContent, CIBTooltipContent } from './components/TooltipContents';
 import DonationSection from './components/DonationSection';
+import Header from './components/Header';
 import './globals.css';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://1595fdnf-1337.uks1.devtunnels.ms';
 
 export default function EFlexy() {
   const [phoneNumber, setPhoneNumber] = useState('07');
@@ -13,7 +17,10 @@ export default function EFlexy() {
   const [customAmount, setCustomAmount] = useState('');
   const [paymentType, setPaymentType] = useState('creditcard');
   const [termsAccepted, setTermsAccepted] = useState(true);
+  const [selectedCauseId, setSelectedCauseId] = useState('');
+  const [donationAmount, setDonationAmount] = useState(0);
   const [wantToDonate, setWantToDonate] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const getCurrentAmount = () => {
     if (amount === 'other') {
@@ -22,43 +29,70 @@ export default function EFlexy() {
     return Number(amount);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Gérer la soumission du formulaire
+
+    if (isProcessing) return;
+
+    // Vérifier si un don est demandé mais qu'aucune cause n'est sélectionnée
+    if (wantToDonate && !selectedCauseId) {
+      console.error('Aucune cause sélectionnée');
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      // Si un don est fait, envoyer d'abord le don
+      if (wantToDonate && donationAmount > 0 && selectedCauseId) {
+        const donationResponse = await fetch(`${API_BASE_URL}/api/dcf/donate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            amount: donationAmount,
+            donatorId: phoneNumber.replace(/\s/g, ''),
+            causeId: selectedCauseId,
+            companyCode: "lq8n4cwqttequ245pggdhdnd",
+            date: new Date().toISOString().split('T')[0]
+          }),
+        });
+
+        if (!donationResponse.ok) {
+          throw new Error('Erreur lors de l\'envoi du don');
+        }
+      }
+
+      // Réinitialiser le formulaire après succès
+      setPhoneNumber('07');
+      setAmount('1000');
+      setCustomAmount('');
+      setPaymentType('creditcard');
+      setWantToDonate(false);
+      setDonationAmount(0);
+      setSelectedCauseId('');
+      alert('Opération réussie !');
+
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert('Une erreur est survenue lors du traitement. Veuillez réessayer.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleDonationChange = (amount: number, causeId: string, isDonating: boolean) => {
+    setDonationAmount(amount);
+    setSelectedCauseId(causeId);
+    setWantToDonate(isDonating);
   };
 
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
-      <nav className="bg-white shadow-md">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <span className="text-[#E30613] text-2xl cursor-pointer">☰</span>
-              <Image
-                src="/Djezzy_logo.png"
-                alt="Djezzy"
-                width={100}
-                height={40}
-                className="h-8 w-auto"
-              />
-            </div>
-            <div className="flex items-center">
-              <div className="relative">
-                <select className="appearance-none bg-white border border-[#E5E5E5] rounded-md py-2 pl-3 pr-8 text-sm text-[#666666] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent">
-                  <option>Français</option>
-                  <option>العربيّة</option>
-                  <option>English</option>
-                </select>
-              </div>
-              <a href="/accounts/login" className="ml-4 text-[#E30613] hover:text-[#B30000] font-medium">
-                Se connecter
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 pt-20">
         <section>
           <div className="flex items-center mb-8">
             <div className="bg-[#e44b1f] px-6 py-2 rounded-md">
@@ -75,7 +109,7 @@ export default function EFlexy() {
                     type="text"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="w-full bg-[#F9FAFB] border border-[#E5E5E5] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent"
+                    className="w-full bg-[#F9FAFB] border border-[#E5E5E5] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent text-black"
                     placeholder="07********"
                     minLength={9}
                     required
@@ -112,7 +146,7 @@ export default function EFlexy() {
                         type="text"
                         value={customAmount}
                         onChange={(e) => setCustomAmount(e.target.value)}
-                        className="ml-2 bg-[#F9FAFB] border border-[#E5E5E5] rounded-md px-2 py-1 w-24 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent"
+                        className="ml-2 bg-[#F9FAFB] border border-[#E5E5E5] rounded-md px-2 py-1 w-24 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent text-black"
                         placeholder="100"
                       />
                     </label>
@@ -172,6 +206,7 @@ export default function EFlexy() {
               <DonationSection
                 selectedAmount={getCurrentAmount()}
                 phoneNumber={phoneNumber}
+                onDonationChange={handleDonationChange}
               />
 
               <div className="mt-8 flex items-center">
@@ -198,9 +233,14 @@ export default function EFlexy() {
               <div className="mt-8 flex justify-end">
                 <button
                   type="submit"
-                  className="bg-[#e44b1f] text-white px-8 py-3 rounded-md hover:scale-105 hover:shadow-lg transition-all duration-300 font-medium text-lg"
+                  disabled={getCurrentAmount() === 0 || isProcessing || (wantToDonate && !selectedCauseId)}
+                  className="bg-[#e44b1f] text-white px-8 py-3 rounded-md hover:scale-105 hover:shadow-lg transition-all duration-300 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Valider le paiement {wantToDonate ? 'et le don' : ''}
+                  {isProcessing ? (
+                    <span>Traitement en cours...</span>
+                  ) : (
+                    <span>Valider le paiement {wantToDonate ? 'et le don' : ''}</span>
+                  )}
                 </button>
               </div>
             </form>

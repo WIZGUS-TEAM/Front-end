@@ -1,13 +1,12 @@
 // Types pour les causes
 export interface Cause {
-  id: number;
-  attributes: {
+    id: number;
     name: string;
     description: string;
     state: string;
     createdAt?: string;
     updatedAt?: string;
-  };
+    documentId: string;
 }
 
 // Types pour les dons
@@ -35,6 +34,7 @@ export interface ApiResponse<T> {
 export interface DonationSectionProps {
   selectedAmount: number;
   phoneNumber: string;
+  onDonationChange: (amount: number, causeId: string, isDonating: boolean) => void;
 }
 
 // Types pour les états des formulaires

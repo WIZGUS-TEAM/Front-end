@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Cause, DonationSectionProps, ApiResponse } from '../../types';
 import { API_ENDPOINTS, API_FILTERS, fetchConfig } from '../../config/api';
 
@@ -11,10 +11,11 @@ type DonationType = 'fixed' | 'percentage';
 type FixedAmount = typeof FIXED_AMOUNTS[number] | null;
 type PercentageValue = typeof PERCENTAGE_VALUES[number] | null;
 
-export default function DonationSection({ selectedAmount, phoneNumber }: DonationSectionProps) {
+export default function DonationSection({ selectedAmount, phoneNumber, onDonationChange }: DonationSectionProps) {
   const [wantToDonate, setWantToDonate] = useState(false);
   const [causes, setCauses] = useState<Cause[]>([]);
   const [selectedCause, setSelectedCause] = useState<string>('');
+  const [selectedCauseId, setSelectedCauseId] = useState<string>('');
   const [isLoadingCauses, setIsLoadingCauses] = useState(true);
   const [donationType, setDonationType] = useState<DonationType>('fixed');
   const [donationAmount, setDonationAmount] = useState<FixedAmount>(FIXED_AMOUNTS[0]);
@@ -32,7 +33,8 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
         const data: ApiResponse<Cause[]> = await response.json();
         setCauses(data.data || []);
         if (data.data && data.data.length > 0) {
-          setSelectedCause(data.data[0].attributes.name);
+          setSelectedCause(data.data[0].name);
+          setSelectedCauseId(data.data[0].documentId);
         }
       } catch (error) {
         console.error('Erreur lors de la récupération des causes:', error);
@@ -44,7 +46,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
     fetchCauses();
   }, []);
 
-  const calculateDonationAmount = () => {
+  const calculateDonationAmount = useCallback(() => {
     if (!wantToDonate) return 0;
 
     switch (donationType) {
@@ -56,6 +58,65 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
       default:
         return 0;
     }
+  }, [wantToDonate, donationType, customAmount, donationAmount, customPercentage, selectedPercentage, selectedAmount]);
+
+  const handleOpenDonation = () => {
+    setWantToDonate(true);
+    const amount = calculateDonationAmount();
+    onDonationChange(amount, selectedCauseId, true);
+  };
+
+  const handleCloseDonation = () => {
+    setWantToDonate(false);
+    setDonationAmount(null);
+    setCustomAmount('');
+    setSelectedPercentage(null);
+    setCustomPercentage('');
+    onDonationChange(0, '', false);
+  };
+
+  const handleAmountChange = (newAmount: FixedAmount) => {
+    setDonationAmount(newAmount);
+    setCustomAmount('');
+    if (wantToDonate) {
+      onDonationChange(newAmount || 0, selectedCauseId, true);
+    }
+  };
+
+  const handleCustomAmountChange = (value: string) => {
+    setCustomAmount(value);
+    setDonationAmount(null);
+    if (wantToDonate) {
+      onDonationChange(Number(value) || 0, selectedCauseId, true);
+    }
+  };
+
+  const handlePercentageChange = (percent: PercentageValue) => {
+    setSelectedPercentage(percent);
+    setCustomPercentage('');
+    if (wantToDonate) {
+      const amount = percent ? Math.round((selectedAmount * percent) / 100) : 0;
+      onDonationChange(amount, selectedCauseId, true);
+    }
+  };
+
+  const handleCustomPercentageChange = (value: string) => {
+    setCustomPercentage(value);
+    setSelectedPercentage(null);
+    if (wantToDonate) {
+      const percent = Number(value) || 0;
+      const amount = Math.round((selectedAmount * percent) / 100);
+      onDonationChange(amount, selectedCauseId, true);
+    }
+  };
+
+  const handleCauseChange = (causeName: string) => {
+    const cause = causes.find(c => c.name === causeName);
+    setSelectedCause(causeName);
+    if (cause && wantToDonate) {
+      setSelectedCauseId(cause.documentId);
+      onDonationChange(calculateDonationAmount(), cause.documentId, true);
+    }
   };
 
   const totalAmount = selectedAmount + calculateDonationAmount();
@@ -65,7 +126,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
       {!wantToDonate && (
         <button
           type="button"
-          onClick={() => setWantToDonate(true)}
+          onClick={handleOpenDonation}
           className="bg-gradient-to-r from-[#e44b1f] to-[#f4721f] text-white px-6 py-2.5 rounded-md hover:scale-105 hover:shadow-lg transition-all duration-300 font-medium text-base flex items-center space-x-2"
         >
           <span>Faire un don</span>
@@ -82,7 +143,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
               <h3 className="text-lg font-bold text-[#1F2937]">Votre don</h3>
               <button
                 type="button"
-                onClick={() => setWantToDonate(false)}
+                onClick={handleCloseDonation}
                 className="text-[#666666] hover:text-[#e44b1f] transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -126,10 +187,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
                       {FIXED_AMOUNTS.map((amount) => (
                         <button
                           key={amount}
-                          onClick={() => {
-                            setDonationAmount(amount);
-                            setCustomAmount('');
-                          }}
+                          onClick={() => handleAmountChange(amount)}
                           className={`px-4 py-2 text-sm rounded-md border transition-all ${
                             donationAmount === amount && !customAmount
                               ? 'bg-[#e44b1f] text-white border-[#e44b1f]'
@@ -145,10 +203,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
                         type="number"
                         placeholder="Autre montant"
                         value={customAmount}
-                        onChange={(e) => {
-                          setCustomAmount(e.target.value);
-                          setDonationAmount(null);
-                        }}
+                        onChange={(e) => handleCustomAmountChange(e.target.value)}
                         className="flex-1 px-3 py-2 text-sm rounded-md border border-[#E5E7EB] focus:outline-none focus:ring-1 focus:ring-[#e44b1f] focus:border-[#e44b1f] text-[#1F2937] placeholder-[#9CA3AF] bg-[#F9FAFB]"
                         min="1"
                       />
@@ -163,10 +218,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
                       {PERCENTAGE_VALUES.map((percent) => (
                         <button
                           key={percent}
-                          onClick={() => {
-                            setSelectedPercentage(percent);
-                            setCustomPercentage('');
-                          }}
+                          onClick={() => handlePercentageChange(percent)}
                           className={`px-4 py-2 text-sm rounded-md border transition-all ${
                             selectedPercentage === percent && !customPercentage
                               ? 'bg-[#e44b1f] text-white border-[#e44b1f]'
@@ -182,10 +234,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
                         type="number"
                         placeholder="Autre pourcentage"
                         value={customPercentage}
-                        onChange={(e) => {
-                          setCustomPercentage(e.target.value);
-                          setSelectedPercentage(null);
-                        }}
+                        onChange={(e) => handleCustomPercentageChange(e.target.value)}
                         className="flex-1 px-3 py-2 text-sm rounded-md border border-[#E5E7EB] focus:outline-none focus:ring-1 focus:ring-[#e44b1f] focus:border-[#e44b1f] text-[#1F2937] placeholder-[#9CA3AF] bg-[#F9FAFB]"
                         min="1"
                         max="100"
@@ -214,12 +263,12 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
                   ) : (
                     <select
                       value={selectedCause}
-                      onChange={(e) => setSelectedCause(e.target.value)}
+                      onChange={(e) => handleCauseChange(e.target.value)}
                       className="w-full appearance-none bg-[#F9FAFB] text-[#1F2937] border border-[#E5E7EB] rounded-md px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-1 focus:ring-[#e44b1f] focus:border-[#e44b1f]"
                     >
                       {causes.map((cause) => (
-                        <option key={cause.id} value={cause.attributes.name}>
-                          {cause.attributes.name}
+                        <option key={cause.id} value={cause.name}>
+                          {cause.name}
                         </option>
                       ))}
                     </select>
