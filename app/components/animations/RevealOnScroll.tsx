@@ -7,6 +7,13 @@ interface RevealOnScrollProps {
   delay?: number
 }
 
+type DirectionOffset = {
+  up: { y: number; x?: never }
+  down: { y: number; x?: never }
+  left: { x: number; y?: never }
+  right: { x: number; y?: never }
+}
+
 export default function RevealOnScroll({ 
   children, 
   direction = "up", 
@@ -15,24 +22,25 @@ export default function RevealOnScroll({
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const directionOffset = {
+  const directionOffset: DirectionOffset = {
     up: { y: 75 },
     down: { y: -75 },
     left: { x: 75 },
     right: { x: -75 }
   }
 
+  const offset = directionOffset[direction]
+
   return (
     <motion.div
       ref={ref}
       initial={{
         opacity: 0,
-        ...directionOffset[direction]
+        ...offset
       }}
       animate={{
         opacity: isInView ? 1 : 0,
-        y: isInView ? 0 : directionOffset[direction]?.y,
-        x: isInView ? 0 : directionOffset[direction]?.x
+        ...(isInView ? { x: 0, y: 0 } : offset)
       }}
       transition={{
         duration: 0.8,
