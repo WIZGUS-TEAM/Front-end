@@ -1,7 +1,7 @@
 "use client"
 import { FormData } from "../MultiStepForm"
 import { motion } from "framer-motion"
-import { Coins, Percent, PiggyBank, ArrowUpDown } from "lucide-react"
+import FormImage from "../FormImage"
 
 type DonationConfigFormProps = {
   allowDirectDonation: boolean
@@ -15,26 +15,22 @@ const DONATION_METHODS = [
   {
     id: "roundup",
     title: "Arrondi automatique",
-    description: "Les paiements sont arrondis et la différence est reversée",
-    icon: ArrowUpDown
+    description: "Les paiements sont arrondis et la différence est reversée"
   },
   {
     id: "percentage",
     title: "Pourcentage du montant",
-    description: "Ex: 1% du montant d'un achat va à une cause",
-    icon: Percent
+    description: "Ex: 1% du montant d'un achat va à une cause"
   },
   {
     id: "custom",
     title: "Don libre",
-    description: "Le client choisit combien donner",
-    icon: Coins
+    description: "Le client choisit combien donner"
   },
   {
     id: "fixed",
     title: "Montant fixe",
-    description: "Ex: 5 DA par achat reversé à une cause",
-    icon: PiggyBank
+    description: "Ex: 5 DA par achat reversé à une cause"
   }
 ]
 
@@ -153,7 +149,7 @@ export default function DonationConfigForm({
       <motion.div variants={itemAnimation} className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900">Modes de dons possibles</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {DONATION_METHODS.map(({ id, title, description, icon: Icon }) => (
+          {DONATION_METHODS.map(({ id, title, description }) => (
             <motion.button
               key={id}
               type="button"
@@ -171,9 +167,9 @@ export default function DonationConfigForm({
               whileTap={{ scale: 0.98 }}
             >
               <div className="relative z-10">
-                <Icon className={`h-8 w-8 mb-4 ${
-                  donationMethods.includes(id) ? "text-blue-500" : "text-gray-400"
-                }`} />
+                <div className="mb-4">
+                  <FormImage />
+                </div>
                 <h4 className={`font-medium mb-2 ${
                   donationMethods.includes(id) ? "text-blue-700" : "text-gray-900"
                 }`}>

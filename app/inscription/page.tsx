@@ -37,7 +37,7 @@ export default function InscriptionPage() {
             <div className="w-full h-[calc(100vh-5rem)] p-8">
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/images/donation-hero.jpg"
+                  src="/form_image.png"
                   alt="Donation illustration"
                   fill
                   className="object-cover"

@@ -1,7 +1,7 @@
 "use client"
 import { FormData } from "../MultiStepForm"
 import { motion } from "framer-motion"
-import { Wallet, Users, CreditCard } from "lucide-react"
+import FormImage from "../FormImage"
 
 type PaymentMethodsFormProps = {
   paymentMethods: string[]
@@ -14,20 +14,17 @@ const PAYMENT_METHODS = [
   {
     id: "wallet",
     title: "Par wallet intégré",
-    description: "Paiement en ligne via Dahabia ou autre",
-    icon: Wallet
+    description: "Paiement en ligne via Dahabia ou autre"
   },
   {
     id: "agents",
     title: "Par rechargement via agents",
-    description: "Ex: Yassir, partenaires locaux",
-    icon: Users
+    description: "Ex: Yassir, partenaires locaux"
   },
   {
     id: "both",
     title: "Les deux méthodes",
-    description: "Offrez plus de flexibilité à vos clients",
-    icon: CreditCard
+    description: "Offrez plus de flexibilité à vos clients"
   }
 ]
 
@@ -93,7 +90,7 @@ export default function PaymentMethodsForm({
         className="grid grid-cols-1 md:grid-cols-3 gap-4"
         variants={formAnimation}
       >
-        {PAYMENT_METHODS.map(({ id, title, description, icon: Icon }) => (
+        {PAYMENT_METHODS.map(({ id, title, description }) => (
           <motion.button
             key={id}
             type="button"
@@ -111,9 +108,9 @@ export default function PaymentMethodsForm({
             whileTap={{ scale: 0.98 }}
           >
             <div className="relative z-10">
-              <Icon className={`h-8 w-8 mb-4 ${
-                paymentMethods.includes(id) ? "text-blue-500" : "text-gray-400"
-              }`} />
+              <div className="mb-4">
+                <FormImage />
+              </div>
               <h3 className={`font-semibold mb-2 ${
                 paymentMethods.includes(id) ? "text-blue-700" : "text-gray-900"
               }`}>
