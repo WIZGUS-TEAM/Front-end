@@ -1,24 +1,12 @@
 "use client"
 import { useState } from "react"
+import { FormData } from "../../types"
 import UserAccountForm from "./steps/UserAccountForm"
 import AssociationInfoForm from "./steps/AssociationInfoForm"
 import EngagementForm from "./steps/EngagementForm"
+import DonationConfigForm from "./steps/DonationConfigForm"
+import PaymentMethodsForm from "./steps/PaymentMethodsForm"
 import SuccessStep from "./steps/SuccessStep"
-
-export type FormData = {
-  // Étape 1 : Informations utilisateur
-  firstName: string
-  lastName: string
-  email: string
-  
-  // Étape 2 : Informations association
-  associationName: string
-  city: string
-  address: string
-  
-  // Étape 3 : Domaines d'engagement
-  engagementAreas: string[]
-}
 
 const INITIAL_DATA: FormData = {
   firstName: "",
@@ -27,7 +15,10 @@ const INITIAL_DATA: FormData = {
   associationName: "",
   city: "",
   address: "",
-  engagementAreas: []
+  engagementAreas: [],
+  allowDirectDonation: false,
+  donationMethods: [],
+  paymentMethods: []
 }
 
 export default function MultiStepForm() {
@@ -75,6 +66,25 @@ export default function MultiStepForm() {
           />
         )
       case 4:
+        return (
+          <DonationConfigForm
+            allowDirectDonation={formData.allowDirectDonation}
+            donationMethods={formData.donationMethods}
+            updateFields={updateFields}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        )
+      case 5:
+        return (
+          <PaymentMethodsForm
+            paymentMethods={formData.paymentMethods}
+            updateFields={updateFields}
+            onNext={nextStep}
+            onPrev={prevStep}
+          />
+        )
+      case 6:
         return <SuccessStep />
       default:
         return null

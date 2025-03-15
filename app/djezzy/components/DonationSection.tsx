@@ -8,6 +8,8 @@ const FIXED_AMOUNTS = [50, 100, 200] as const;
 const PERCENTAGE_VALUES = [5, 10, 15] as const;
 
 type DonationType = 'fixed' | 'percentage';
+type FixedAmount = typeof FIXED_AMOUNTS[number] | null;
+type PercentageValue = typeof PERCENTAGE_VALUES[number] | null;
 
 export default function DonationSection({ selectedAmount, phoneNumber }: DonationSectionProps) {
   const [wantToDonate, setWantToDonate] = useState(false);
@@ -15,9 +17,9 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
   const [selectedCause, setSelectedCause] = useState<string>('');
   const [isLoadingCauses, setIsLoadingCauses] = useState(true);
   const [donationType, setDonationType] = useState<DonationType>('fixed');
-  const [donationAmount, setDonationAmount] = useState<typeof FIXED_AMOUNTS[number]>(FIXED_AMOUNTS[0]);
+  const [donationAmount, setDonationAmount] = useState<FixedAmount>(FIXED_AMOUNTS[0]);
   const [customAmount, setCustomAmount] = useState('');
-  const [selectedPercentage, setSelectedPercentage] = useState<typeof PERCENTAGE_VALUES[number]>(PERCENTAGE_VALUES[0]);
+  const [selectedPercentage, setSelectedPercentage] = useState<PercentageValue>(PERCENTAGE_VALUES[0]);
   const [customPercentage, setCustomPercentage] = useState('');
 
   useEffect(() => {
@@ -47,9 +49,9 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
 
     switch (donationType) {
       case 'fixed':
-        return customAmount ? Number(customAmount) : donationAmount;
+        return customAmount ? Number(customAmount) : (donationAmount || 0);
       case 'percentage':
-        const percentValue = customPercentage ? Number(customPercentage) : selectedPercentage;
+        const percentValue = customPercentage ? Number(customPercentage) : (selectedPercentage || 0);
         return Math.round((selectedAmount * percentValue) / 100);
       default:
         return 0;
@@ -145,7 +147,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
                         value={customAmount}
                         onChange={(e) => {
                           setCustomAmount(e.target.value);
-                          setDonationAmount(0);
+                          setDonationAmount(null);
                         }}
                         className="flex-1 px-3 py-2 text-sm rounded-md border border-[#E5E7EB] focus:outline-none focus:ring-1 focus:ring-[#e44b1f] focus:border-[#e44b1f] text-[#1F2937] placeholder-[#9CA3AF] bg-[#F9FAFB]"
                         min="1"
@@ -182,7 +184,7 @@ export default function DonationSection({ selectedAmount, phoneNumber }: Donatio
                         value={customPercentage}
                         onChange={(e) => {
                           setCustomPercentage(e.target.value);
-                          setSelectedPercentage(0);
+                          setSelectedPercentage(null);
                         }}
                         className="flex-1 px-3 py-2 text-sm rounded-md border border-[#E5E7EB] focus:outline-none focus:ring-1 focus:ring-[#e44b1f] focus:border-[#e44b1f] text-[#1F2937] placeholder-[#9CA3AF] bg-[#F9FAFB]"
                         min="1"

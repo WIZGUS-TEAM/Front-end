@@ -1,14 +1,7 @@
 "use client"
-import { FormData } from "../MultiStepForm"
+import { PaymentMethodsFormProps } from "../../../types"
 import { motion } from "framer-motion"
 import FormImage from "../FormImage"
-
-type PaymentMethodsFormProps = {
-  paymentMethods: string[]
-  updateFields: (fields: Partial<FormData>) => void
-  onNext: () => void
-  onPrev: () => void
-}
 
 const PAYMENT_METHODS = [
   {

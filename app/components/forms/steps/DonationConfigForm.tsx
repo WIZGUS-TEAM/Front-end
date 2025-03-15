@@ -1,15 +1,7 @@
 "use client"
-import { FormData } from "../MultiStepForm"
+import { DonationConfigFormProps } from "../../../types"
 import { motion } from "framer-motion"
 import FormImage from "../FormImage"
-
-type DonationConfigFormProps = {
-  allowDirectDonation: boolean
-  donationMethods: string[]
-  updateFields: (fields: Partial<FormData>) => void
-  onNext: () => void
-  onPrev: () => void
-}
 
 const DONATION_METHODS = [
   {

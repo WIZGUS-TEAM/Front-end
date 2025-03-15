@@ -42,4 +42,44 @@ export interface FormState {
   isLoading: boolean;
   error: string | null;
   success: boolean;
-} 
+}
+
+// Types pour le formulaire multi-étapes
+export interface FormData {
+  // Étape 1 : Informations utilisateur
+  firstName: string;
+  lastName: string;
+  email: string;
+  
+  // Étape 2 : Informations association
+  associationName: string;
+  city: string;
+  address: string;
+  
+  // Étape 3 : Domaines d'engagement
+  engagementAreas: string[];
+
+  // Étape 4 : Configuration des dons
+  allowDirectDonation: boolean;
+  donationMethods: string[];
+
+  // Étape 5 : Méthodes de paiement
+  paymentMethods: string[];
+}
+
+// Types pour les props des composants de formulaire
+export interface FormStepProps {
+  updateFields: (fields: Partial<FormData>) => void;
+  onNext: () => void;
+  onPrev?: () => void;
+}
+
+export interface UserAccountFormProps extends FormStepProps, Pick<FormData, 'firstName' | 'lastName' | 'email'> {}
+
+export interface AssociationInfoFormProps extends FormStepProps, Pick<FormData, 'associationName' | 'city' | 'address'> {}
+
+export interface EngagementFormProps extends FormStepProps, Pick<FormData, 'engagementAreas'> {}
+
+export interface DonationConfigFormProps extends FormStepProps, Pick<FormData, 'allowDirectDonation' | 'donationMethods'> {}
+
+export interface PaymentMethodsFormProps extends FormStepProps, Pick<FormData, 'paymentMethods'> {} 

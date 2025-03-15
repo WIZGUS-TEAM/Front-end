@@ -1,5 +1,5 @@
 "use client"
-import { FormData } from "../MultiStepForm"
+import { AssociationInfoFormProps } from "../../../types"
 import { motion } from "framer-motion"
 
 const ALGERIAN_CITIES = [
@@ -24,15 +24,6 @@ const ALGERIAN_CITIES = [
   "Mostaganem",
   "Médéa"
 ]
-
-type AssociationInfoFormProps = {
-  associationName: string
-  city: string
-  address: string
-  updateFields: (fields: Partial<FormData>) => void
-  onNext: () => void
-  onPrev: () => void
-}
 
 export default function AssociationInfoForm({
   associationName,

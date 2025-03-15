@@ -1,13 +1,6 @@
 "use client"
-import { FormData } from "../MultiStepForm"
+import { EngagementFormProps } from "../../../types"
 import { motion } from "framer-motion"
-
-type EngagementFormProps = {
-  engagementAreas: string[]
-  updateFields: (fields: Partial<FormData>) => void
-  onNext: () => void
-  onPrev: () => void
-}
 
 const ENGAGEMENT_AREAS = [
   "Éducation",

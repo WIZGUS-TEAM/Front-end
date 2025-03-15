@@ -1,14 +1,6 @@
 "use client"
-import { FormData } from "../MultiStepForm"
+import { UserAccountFormProps } from "../../../types"
 import { motion } from "framer-motion"
-
-interface UserAccountFormProps {
-  firstName: string
-  lastName: string
-  email: string
-  updateFields: (fields: Partial<FormData>) => void
-  onNext: () => void
-}
 
 export default function UserAccountForm({
   firstName,
