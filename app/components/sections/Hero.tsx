@@ -2,6 +2,7 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Button } from "../Button/Button"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 export default function Hero() {
   return (
@@ -36,10 +37,12 @@ export default function Hero() {
               transition={{ delay: 0.6, duration: 0.6 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button className="h-12 px-8 bg-[#0095de] text-white hover:bg-[#0095de]/90 font-medium shadow-lg transition-transform hover:translate-y-[-2px]">
-                Demo
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link href="/djezzy">
+                <Button className="h-12 px-8 bg-[#0095de] text-white hover:bg-[#0095de]/90 font-medium shadow-lg transition-transform hover:translate-y-[-2px]">
+                  Demo
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
           <motion.div 

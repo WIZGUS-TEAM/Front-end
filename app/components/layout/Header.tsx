@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, LogIn } from "lucide-react"
 import { Button } from "../Button/Button"
 import Link from "next/link"
+import Image from 'next/image'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -40,14 +41,24 @@ export default function Header() {
             }}
             transition={{ duration: 0.3 }}
           >
-            Smart Donation
+            <div className="flex items-center">
+              <Image
+                src="/noBgWhite.png"
+                alt="Logo"
+                width={200}
+                height={200}
+                className="h-12 w-auto"
+                priority
+                quality={100}
+              />
+            </div>
           </motion.div>
 
           <div className="hidden md:flex items-center space-x-8">
             {[
               { name: "Accueil", href: "/" },
-              { name: "Fonctionnalités", href: "/#fonctionnalites" },
-              { name: "API", href: "/#api" },
+              { name: "Fonctionnalités", href: "/#features" },
+              { name: "Pour qui ?", href: "/#for-whom" },
               { name: "Contact", href: "/#contact" }
             ].map(({ name, href }) => (
               <Link
@@ -68,15 +79,6 @@ export default function Header() {
             }}
             transition={{ duration: 0.3 }}
           >
-            <Link href="/inscription">
-              <Button 
-                variant="solid" 
-                size="md"
-                className="shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
-              >
-                Inscrivez votre cause
-              </Button>
-            </Link>
             <Link href="/company">
               <Button 
                 variant="solid" 
@@ -84,6 +86,15 @@ export default function Header() {
                 className="shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
               >
                 Intégrez notre API
+              </Button>
+            </Link>
+            <Link href="/inscription">
+              <Button 
+                variant="solid" 
+                size="md"
+                className="shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
+              >
+                Inscrivez votre cause
               </Button>
             </Link>
             <Button 
@@ -117,8 +128,8 @@ export default function Header() {
               <div className="py-4 space-y-4">
                 {[
                   { name: "Accueil", href: "/" },
-                  { name: "Fonctionnalités", href: "/#fonctionnalites" },
-                  { name: "API", href: "/#api" },
+                  { name: "Fonctionnalités", href: "/#features" },
+                  { name: "Pour qui ?", href: "/#for-whom" },
                   { name: "Contact", href: "/#contact" }
                 ].map(({ name, href }, i) => (
                   <motion.div
@@ -138,15 +149,6 @@ export default function Header() {
                   transition={{ delay: 0.4 }}
                   className="px-4 space-y-2"
                 >
-                  <Link href="/inscription">
-                    <Button 
-                      variant="solid" 
-                      size="md"
-                      className="w-full shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
-                    >
-                      Inscrivez votre cause
-                    </Button>
-                  </Link>
                   <Link href="/company">
                     <Button 
                       variant="solid" 
@@ -154,6 +156,15 @@ export default function Header() {
                       className="w-full shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
                     >
                       Intégrez notre API
+                    </Button>
+                  </Link>
+                  <Link href="/inscription">
+                    <Button 
+                      variant="solid" 
+                      size="md"
+                      className="w-full shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
+                    >
+                      Inscrivez votre cause
                     </Button>
                   </Link>
                   <Button 

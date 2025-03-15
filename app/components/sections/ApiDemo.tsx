@@ -59,14 +59,6 @@ export default function ApiDemo() {
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <Button 
-                    variant="outline" 
-                    size="lg"
-                    className="w-full md:w-auto border-[#3100b7] text-[#3100b7] hover:bg-[#3100b7] hover:text-white flex items-center justify-center gap-2"
-                  >
-                    Voir la documentation
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
                 </div>
               </div>
             </div>

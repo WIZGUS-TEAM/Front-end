@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Djezzy';
+  src: url('/fonts/Djezzy-Regular.woff2') format('woff2'),
+       url('/fonts/Djezzy-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Djezzy';
+  src: url('/fonts/Djezzy-Bold.woff2') format('woff2'),
+       url('/fonts/Djezzy-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-djezzy: 'Djezzy', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  font-family: var(--font-djezzy);
+} 

@@ -16,10 +16,11 @@ export default function CompanyRegistration() {
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
                 <Image
                   src="/form_image.png"
-                  alt="Smart Donation pour les entreprises"
+                  alt="SolidaryPay pour les entreprises"
                   fill
                   className="object-cover"
                   priority
+                  quality={100}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#2f01ad]/20 to-[#0095de]/20" />
               </div>

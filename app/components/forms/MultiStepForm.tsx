@@ -10,8 +10,6 @@ export type FormData = {
   firstName: string
   lastName: string
   email: string
-  password: string
-  confirmPassword: string
   
   // Étape 2 : Informations association
   associationName: string
@@ -26,8 +24,6 @@ const INITIAL_DATA: FormData = {
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
-  confirmPassword: "",
   associationName: "",
   city: "",
   address: "",
@@ -55,7 +51,7 @@ export default function MultiStepForm() {
       case 1:
         return (
           <UserAccountForm 
-            {...formData} 
+            {...formData}
             updateFields={updateFields}
             onNext={nextStep}
           />

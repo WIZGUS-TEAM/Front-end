@@ -11,8 +11,6 @@ export type CompanyFormData = {
   firstName: string
   lastName: string
   email: string
-  password: string
-  confirmPassword: string
   
   // Étape 2 : Informations entreprise
   companyName: string
@@ -32,8 +30,6 @@ const INITIAL_DATA: CompanyFormData = {
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
-  confirmPassword: "",
   companyName: "",
   sector: "",
   city: "",
@@ -42,6 +38,12 @@ const INITIAL_DATA: CompanyFormData = {
   donationMethods: [],
   allowDirectDonation: false
 }
+
+const ALGERIAN_CITIES = [
+  'Alger', 'Oran', 'Constantine', 'Annaba', 'Blida', 'Batna', 'Djelfa', 'Sétif', 'Sidi Bel Abbès', 'Biskra',
+  'Tébessa', 'El Oued', 'Skikda', 'Tiaret', 'Béjaïa', 'Tlemcen', 'Ouargla', 'Béchar', 'Mostaganem', 'Bordj Bou Arréridj',
+  'Chlef', 'Souk Ahras', 'Médéa', 'El Eulma', 'Touggourt', 'Ghardaïa', 'Saïda', 'Laghouat', 'M\'Sila', 'Jijel'
+];
 
 export default function CompanyRegistrationForm() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -64,7 +66,7 @@ export default function CompanyRegistrationForm() {
       case 1:
         return (
           <AdminAccountForm 
-            {...formData} 
+            {...formData}
             updateFields={updateFields}
             onNext={nextStep}
           />

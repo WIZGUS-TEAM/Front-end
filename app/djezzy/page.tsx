@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Tooltip from './components/Tooltip';
 import { EFlexyTooltipContent, CCPTooltipContent, CIBTooltipContent } from './components/TooltipContents';
 import DonationSection from './components/DonationSection';
+import './globals.css';
 
 export default function EFlexy() {
   const [phoneNumber, setPhoneNumber] = useState('07');
@@ -12,6 +13,7 @@ export default function EFlexy() {
   const [customAmount, setCustomAmount] = useState('');
   const [paymentType, setPaymentType] = useState('creditcard');
   const [termsAccepted, setTermsAccepted] = useState(true);
+  const [wantToDonate, setWantToDonate] = useState(false);
 
   const getCurrentAmount = () => {
     if (amount === 'other') {
@@ -33,8 +35,8 @@ export default function EFlexy() {
             <div className="flex items-center space-x-4">
               <span className="text-[#E30613] text-2xl cursor-pointer">☰</span>
               <Image
-                src="/E-Flexy_files/ecare.e92057981222.png"
-                alt="ecare"
+                src="/Djezzy_logo.png"
+                alt="Djezzy"
                 width={100}
                 height={40}
                 className="h-8 w-auto"
@@ -59,12 +61,9 @@ export default function EFlexy() {
       <main className="container mx-auto px-4 py-8">
         <section>
           <div className="flex items-center mb-8">
-            <h1 className="text-2xl font-bold text-[#333333]">E-Flexy</h1>
-            <Tooltip content={<EFlexyTooltipContent />}>
-              <button className="ml-2 w-6 h-6 rounded-full border border-[#E30613] text-[#E30613] flex items-center justify-center hover:bg-[#E30613] hover:text-white transition-colors">
-                ?
-              </button>
-            </Tooltip>
+            <div className="bg-[#e44b1f] px-6 py-2 rounded-md">
+              <h1 className="text-2xl font-bold text-white">E-Flexy</h1>
+            </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-lg p-6 border border-[#E5E5E5]">
@@ -76,7 +75,7 @@ export default function EFlexy() {
                     type="text"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="w-full border border-[#E5E5E5] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent"
+                    className="w-full bg-[#F9FAFB] border border-[#E5E5E5] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent"
                     placeholder="07********"
                     minLength={9}
                     required
@@ -113,19 +112,15 @@ export default function EFlexy() {
                         type="text"
                         value={customAmount}
                         onChange={(e) => setCustomAmount(e.target.value)}
-                        className="ml-2 border border-[#E5E5E5] rounded-md px-2 py-1 w-24 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent"
+                        className="ml-2 bg-[#F9FAFB] border border-[#E5E5E5] rounded-md px-2 py-1 w-24 focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:border-transparent"
                         placeholder="100"
                       />
                     </label>
                   </div>
-                </div>
-              </div>
 
-              <div className="mt-8">
-                <h3 className="text-lg font-semibold mb-4 text-[#333333]">Sélectionner un moyen de paiement</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center p-4 border border-[#E5E5E5] rounded-lg hover:border-[#E30613] transition-colors">
-                    <label className="flex items-center flex-1 cursor-pointer">
+                  <h3 className="text-lg font-semibold mt-6 mb-2 text-[#333333]">Sélectionner un moyen de paiement</h3>
+                  <div className="flex space-x-6">
+                    <label className="flex items-center cursor-pointer">
                       <input
                         type="radio"
                         name="payment_type"
@@ -135,21 +130,20 @@ export default function EFlexy() {
                         className="form-radio text-[#E30613] focus:ring-[#E30613]"
                       />
                       <Image
-                        src="/E-Flexy_files/ccp.8a35eb39567c.png"
-                        alt="CCP"
-                        width={80}
+                        src="/AlgeriePoste.svg"
+                        alt="Algérie Poste"
+                        width={40}
                         height={40}
                         className="ml-2"
                       />
+                      <Tooltip content={<CCPTooltipContent />}>
+                        <div className="ml-2 w-5 h-5 rounded-full border border-[#E30613] text-[#E30613] text-xs flex items-center justify-center hover:bg-[#E30613] hover:text-white transition-colors cursor-pointer">
+                          ?
+                        </div>
+                      </Tooltip>
                     </label>
-                    <Tooltip content={<CCPTooltipContent />}>
-                      <button className="ml-2 w-6 h-6 rounded-full border border-[#E30613] text-[#E30613] flex items-center justify-center hover:bg-[#E30613] hover:text-white transition-colors">
-                        ?
-                      </button>
-                    </Tooltip>
-                  </div>
-                  <div className="flex items-center p-4 border border-[#E5E5E5] rounded-lg hover:border-[#E30613] transition-colors">
-                    <label className="flex items-center flex-1 cursor-pointer">
+                    
+                    <label className="flex items-center cursor-pointer">
                       <input
                         type="radio"
                         name="payment_type"
@@ -159,18 +153,18 @@ export default function EFlexy() {
                         className="form-radio text-[#E30613] focus:ring-[#E30613]"
                       />
                       <Image
-                        src="/E-Flexy_files/cib.bc8403a65f49.png"
+                        src="/cib.png"
                         alt="CIB"
-                        width={80}
+                        width={40}
                         height={40}
                         className="ml-2"
                       />
+                      <Tooltip content={<CIBTooltipContent />}>
+                        <div className="ml-2 w-5 h-5 rounded-full border border-[#E30613] text-[#E30613] text-xs flex items-center justify-center hover:bg-[#E30613] hover:text-white transition-colors cursor-pointer">
+                          ?
+                        </div>
+                      </Tooltip>
                     </label>
-                    <Tooltip content={<CIBTooltipContent />}>
-                      <button className="ml-2 w-6 h-6 rounded-full border border-[#E30613] text-[#E30613] flex items-center justify-center hover:bg-[#E30613] hover:text-white transition-colors">
-                        ?
-                      </button>
-                    </Tooltip>
                   </div>
                 </div>
               </div>
@@ -204,9 +198,9 @@ export default function EFlexy() {
               <div className="mt-8 flex justify-end">
                 <button
                   type="submit"
-                  className="bg-[#E30613] text-white px-8 py-3 rounded-md hover:bg-[#B30000] transition-colors font-medium text-lg"
+                  className="bg-[#e44b1f] text-white px-8 py-3 rounded-md hover:scale-105 hover:shadow-lg transition-all duration-300 font-medium text-lg"
                 >
-                  Valider
+                  Valider le paiement {wantToDonate ? 'et le don' : ''}
                 </button>
               </div>
             </form>

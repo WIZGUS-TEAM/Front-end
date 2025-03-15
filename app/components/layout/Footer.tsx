@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Heart } from "lucide-react"
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,9 +8,16 @@ export default function Footer() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Heart className="h-6 w-6 text-white" />
-              <span className="text-xl font-bold text-white">Smart Donation</span>
+            <div className="flex items-center">
+              <Image
+                src="/noBgWhite.png"
+                alt="Logo"
+                width={200}
+                height={200}
+                className="h-12 w-auto"
+                priority
+               
+              />
             </div>
             <p className="text-white/80 max-w-xs">
               Transformez chaque paiement en un acte de solidarité avec notre solution innovante.
@@ -40,7 +48,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div>
+          <div id="contact">
             <h3 className="text-lg font-bold mb-4">Suivez-nous</h3>
             <div className="flex gap-4">
               <SocialLink href="#" network="linkedin" />
@@ -50,7 +58,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <p className="text-white/80">© {new Date().getFullYear()} Smart Donation. Tous droits réservés.</p>
+          <p className="text-white/80">© {new Date().getFullYear()} SolidaryPay. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
