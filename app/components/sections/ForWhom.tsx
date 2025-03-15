@@ -1,6 +1,7 @@
 import { Users, Heart } from "lucide-react"
 import { Button } from "../Button/Button"
 import RevealOnScroll from "../animations/RevealOnScroll"
+import Link from "next/link"
 
 export default function ForWhom() {
   return (
@@ -38,9 +39,11 @@ export default function ForWhom() {
               <p className="text-gray-600 mb-8 flex-grow">
                 Accédez à un flux de dons régulier et transparent, sans complexité administrative.
               </p>
-              <Button className="bg-[#c30ec3] text-white hover:bg-[#c30ec3]/90 mt-auto transition-transform hover:translate-y-[-2px]">
-                Inscrivez votre cause
-              </Button>
+              <Link href="/inscription">
+                <Button className="bg-[#c30ec3] text-white hover:bg-[#c30ec3]/90 mt-auto transition-transform hover:translate-y-[-2px]">
+                  Inscrivez votre cause
+                </Button>
+              </Link>
             </div>
           </RevealOnScroll>
         </div>

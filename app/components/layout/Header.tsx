@@ -1,9 +1,9 @@
 "use client"
 import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Heart, Menu, X } from "lucide-react"
-import { Button } from "../Button/Button"
 import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X, LogIn } from "lucide-react"
+import { Button } from "../Button/Button"
+import Link from "next/link"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -19,7 +19,7 @@ export default function Header() {
   }, [])
 
   return (
-    <motion.header 
+    <motion.header
       initial={{ y: -100 }}
       animate={{ 
         y: 0,
@@ -29,46 +29,29 @@ export default function Header() {
         y: { type: "spring", stiffness: 100 },
         height: { duration: 0.3, ease: "easeInOut" }
       }}
-      className="sticky top-0 z-50 w-full bg-gradient-to-l from-[#2f01ad] to-[#0095de] text-white"
+      className="fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-l from-[#2f01ad] to-[#0095de] text-white"
     >
       <div className="container mx-auto px-4 h-full">
         <nav className="flex items-center justify-between h-full">
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 1,
-              scale: isAtTop ? 1 : 0.95,
-              y: isAtTop ? 0 : -2
+            className="text-white font-bold text-2xl"
+            animate={{
+              scale: isAtTop ? 1 : 0.95
             }}
             transition={{ duration: 0.3 }}
-            className="flex items-center gap-2"
           >
-            <Heart className="h-6 w-6 text-white transition-all duration-300" />
-            <span className="text-xl font-bold text-white transition-all duration-300">Smart Donation</span>
+            Smart Donation
           </motion.div>
 
-          <div className="hidden md:flex items-center gap-6">
-            {["Accueil", "Fonctionnalités", "API", "Contact"].map((item, i) => (
-              <motion.div
+          <div className="hidden md:flex items-center space-x-8">
+            {["Accueil", "Fonctionnalités", "API", "Contact"].map((item) => (
+              <Link
                 key={item}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ 
-                  opacity: 1,
-                  y: 0,
-                  scale: isAtTop ? 1 : 0.95
-                }}
-                transition={{ 
-                  delay: i * 0.1,
-                  duration: 0.3
-                }}
+                href={item === "Accueil" ? "#" : `#${item.toLowerCase()}`}
+                className="text-white hover:text-white/80 transition-colors"
               >
-                <Link 
-                  href={item === "Accueil" ? "#" : `#${item.toLowerCase()}`} 
-                  className="text-white hover:text-white/80 transition-all duration-300"
-                >
-                  {item}
-                </Link>
-              </motion.div>
+                {item}
+              </Link>
             ))}
           </div>
 
@@ -80,19 +63,29 @@ export default function Header() {
             }}
             transition={{ duration: 0.3 }}
           >
-            <Button 
-              variant="solid" 
-              size="md"
-              className="shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
-            >
-              Inscrivez votre cause
-            </Button>
+            <Link href="/inscription">
+              <Button 
+                variant="solid" 
+                size="md"
+                className="shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
+              >
+                Inscrivez votre cause
+              </Button>
+            </Link>
             <Button 
               variant="solid" 
               size="md"
               className="shadow-[0_0_15px_rgba(0,149,222,0.3)] hover:shadow-[0_0_20px_rgba(0,149,222,0.5)] transition-all duration-300"
             >
               Intégrez notre API
+            </Button>
+            <Button 
+              variant="outline" 
+              size="md"
+              className="border-white text-white hover:bg-white hover:text-[#2f01ad] transition-all duration-300 flex items-center gap-2"
+            >
+              <LogIn className="h-4 w-4" />
+              Connexion
             </Button>
           </motion.div>
 
@@ -127,6 +120,21 @@ export default function Header() {
                     </Link>
                   </motion.div>
                 ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="px-4"
+                >
+                  <Button 
+                    variant="outline" 
+                    size="md"
+                    className="w-full border-white text-white hover:bg-white hover:text-[#2f01ad] transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <LogIn className="h-4 w-4" />
+                    Connexion
+                  </Button>
+                </motion.div>
               </div>
             </motion.div>
           )}
