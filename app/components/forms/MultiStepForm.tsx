@@ -3,8 +3,6 @@ import { useState } from "react"
 import UserAccountForm from "./steps/UserAccountForm"
 import AssociationInfoForm from "./steps/AssociationInfoForm"
 import EngagementForm from "./steps/EngagementForm"
-import DonationConfigForm from "./steps/DonationConfigForm"
-import PaymentMethodsForm from "./steps/PaymentMethodsForm"
 import SuccessStep from "./steps/SuccessStep"
 
 export type FormData = {
@@ -22,13 +20,6 @@ export type FormData = {
   
   // Étape 3 : Domaines d'engagement
   engagementAreas: string[]
-
-  // Configuration des dons
-  donationMethods: string[]
-  allowDirectDonation: boolean
-
-  // Méthodes de paiement
-  paymentMethods: string[]
 }
 
 const INITIAL_DATA: FormData = {
@@ -40,10 +31,7 @@ const INITIAL_DATA: FormData = {
   associationName: "",
   city: "",
   address: "",
-  engagementAreas: [],
-  donationMethods: [],
-  allowDirectDonation: false,
-  paymentMethods: []
+  engagementAreas: []
 }
 
 export default function MultiStepForm() {
@@ -91,24 +79,6 @@ export default function MultiStepForm() {
           />
         )
       case 4:
-        return (
-          <PaymentMethodsForm 
-            {...formData}
-            updateFields={updateFields}
-            onNext={nextStep}
-            onPrev={prevStep}
-          />
-        )
-      case 5:
-        return (
-          <DonationConfigForm 
-            {...formData}
-            updateFields={updateFields}
-            onNext={nextStep}
-            onPrev={prevStep}
-          />
-        )
-      case 6:
         return <SuccessStep />
       default:
         return null
